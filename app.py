@@ -493,6 +493,9 @@ def remove_friend(friend_id):
         db.session.commit()
     
     return redirect(url_for("friends"))
+@app.route("/settings")
+def settings():
+    return render_template("settings.html")
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
