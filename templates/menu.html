@@ -1,0 +1,20 @@
+ <div class="sidebar">
+        <div class="{% if request.path == '/menu' %}active{% else %}menu{% endif %}">
+            <a href="/menu">Menu</a>
+        </div>
+        <div class="{% if request.path == '/spaces' %}active{% else %}menu{% endif %}">
+            <a href="/spaces">Your Spaces</a>
+        </div>
+        <div class="{% if request.path == '/friends' %}active{% else %}menu{% endif %}">
+            <a href="/friends">Friends</a>
+        </div>
+        <div class="{% if request.path == '/people' %}active{% else %}menu{% endif %}">
+            <a href="/people">Find people</a>
+        </div>
+        <div class="{% if request.path == '/friend_requests' %}active{% else %}menu{% endif %}">
+            <a href="/friend_requests">Friend Requests</a>
+        </div>
+        <div class="{% if request.path == '/settings' %}active{% else %}menu{% endif %}">
+            <a href="/settings">Settings</a>
+        </div>
+    </div>

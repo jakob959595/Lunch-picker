@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Malica</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="card">
+    <h1>Create your new space</h1>
+    <form action="/create_space" method="post">
+        <input type="text" placeholder="Space name" name="space_name" required><br>
+        <input type="text" placeholder="Space description" name="space_description"><br>
+        <button type="submit">Create space</button>
+        <button><a href="/spaces">Back</a></button>
+    </form>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

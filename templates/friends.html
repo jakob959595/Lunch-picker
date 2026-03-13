@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Malica</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="home">
+    <div class = "navbar">
+        <a href="/menu"><img src="/static/photos/logo2.png" alt="logo"></a>
+        <h1>Welcome to Malica</h1>
+        <button class="logout"><a href="/logout">Log out</a></button>
+    </div>
+    <div class="main">
+    {% include 'menu.html' %}
+    <div class="glavni-del">
+       <div class="description"> 
+         <h2>Your friends</h2>
+        <p>Here you can see all your friends and manage them. You can send friend requests, accept or decline requests, and remove friends.</p>
+       </div>
+        <div class="spaces">
+            <div class="space-list">
+                {% for friend in friends %}
+                <div class="space-item">
+                    <h3>{{ friend.username }}</h3>
+                    <p>Email: {{ friend.email }}</p>
+                    <button><a href="/remove_friend/{{ friend.id }}">Remove Friend</a></button>
+                    <button><a href="/user/{{ friend.id }}">View Profile</a></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

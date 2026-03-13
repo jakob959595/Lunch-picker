@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Malica</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="home">
+    <div class = "navbar">
+        <a href="/menu"><img src="/static/photos/logo2.png" alt="logo"></a>
+        <h1>Welcome to Malica</h1>
+        <button class="logout"><a href="/logout">Log out</a></button>
+    </div>
+    <div class="main">
+   {% include 'menu.html' %}
+    <div class="glavni-del">
+         <div class="description"> 
+            <div class = "space-info"> 
+                {% if current_user_id == space.owner_id %}
+                <button class= "back"><a href="/invite_to_space/{{ space.id }}">Add friends</a></button>
+                 {% else %}
+                    <button class = "back"><a href="/leave_space/{{ space.id }}">Leave space</a></button>
+                 {% endif %}
+                <div class = "naslov">
+                    <h2>{{ space.name }}</h2>
+                </div>
+                <button class = "back"><a href="/spaces">Back to Spaces</a></button>
+            </div>
+            <div class = "vsebina"><p>{{ space.description }}</p></div>
+            <h3 class ="vsebina">Weekly Malca Schedule</h3>
+            {% set imena_dni = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] %}
+            <div class="time-table">
+    {% for vnos in urnik %}
+    <div class="one-day">
+        <h3>{{ imena_dni[vnos.day_of_week] }}</h3>
+        <p>Responsible: {{ vnos.user.username }}</p>
+
+        {% if vnos.user_id == current_user_id %}
+            {% if vnos.place_name %}
+                <p>Selected: <strong>{{ vnos.place_name }}</strong></p>
+                <form action="/add_food_place/{{ vnos.id }}" method="post">
+                    <input type="hidden" name="place_name" value="" placeholder="Enter new food place">
+                    <button type="submit">Reset choice</button>
+                </form>
+            {% else %}
+                <form action="/add_food_place/{{ vnos.id }}" method="post">
+                    <input type="text" name="place_name" placeholder="Enter food place" required>
+                    <button type="submit">Add food place</button>
+                </form>
+            {% endif %}
+        {% else %}
+            <p>Food place: {{ vnos.place_name or "Not assigned yet" }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+            <div class = "members-list">
+                {% for member in members %}
+                <div class = "member-item">
+                    {% if member.id == space.owner_id %}
+                        <strong><h3>{{ member.username }} (Owner)</h3></strong>
+                        <p>{{ member.email }}</p>
+                        <button><a href="/profile/{{ member.id }}">View Profile</a></button>
+                        {% else %}
+                        <h3>{{ member.username }}</h3>
+                        <p>{{ member.email }}</p>
+                    <button><a href="/profile/{{ member.id }}">View Profile</a></button>
+                        <button><a href="/remove_user/{{space.id}}/{{ member.id }}">Remove user</a></button>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

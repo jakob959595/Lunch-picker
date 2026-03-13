@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Malica</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="home">
+    <div class = "navbar">
+        <a href="/menu"><img src="/static/photos/logo2.png" alt="logo"></a>
+        <h1>Welcome to Malica</h1>
+        <button class="logout"><a href="/logout">Log out</a></button>
+    </div>
+    <div class="main">
+    {% include 'menu.html' %}
+    <div class="glavni-del">
+       <div class="description"> 
+         <h2>Your Spaces</h2>
+        <p>Here you can see all your spaces and manage them. You can create new spaces, join existing ones, and leave spaces you no longer want to be a part of.</p>
+       </div>
+        <div class="spaces">
+            <button><a href="/create_space">Create New Space</a></button>
+            <h2>Your Spaces</h2>
+            <div class="space-list">
+                {% for space in spaces %}
+                <div class="space-item">
+                    <h3>{{ space.name }}</h3>
+                    <p>Owner: {{ space.owner.username }}</p>
+                    <button><a href="/space_detail/{{ space.id }}">View Space</a></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

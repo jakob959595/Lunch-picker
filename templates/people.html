@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Malica</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="home">
+    <div class = "navbar">
+        <a href="/menu"><img src="/static/photos/logo2.png" alt="logo"></a>
+        <h1>Welcome to Malica</h1>
+        <button class="logout"><a href="/logout">Log out</a></button>
+    </div>
+    <div class="main">
+   {% include 'menu.html' %}
+    <div class="glavni-del">
+         <div class="description"> 
+        <h2>Find people</h2>
+        <div class="people">
+            <form action="/find_person" method="GET">
+                <input type="text" name="query" placeholder="Enter username...">
+                <button type="submit">Search</button>
+            </form>
+            <div class="people-list">
+                {% for person in people %}
+                <div class="person-item">
+                    <h3>{{ person.username }}</h3>
+                    <button><a href="/profile/{{ person.id }}">View Profile</a></button>
+                    <button><a href="/add_friend/{{ person.id }}">Add Friend</a></button>
+                </div>
+                {% endfor %}
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
